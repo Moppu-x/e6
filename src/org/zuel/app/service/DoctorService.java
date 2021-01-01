@@ -6,9 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.zuel.app.dao.DeptDao;
 import org.zuel.app.dao.DoctorDao;
 import org.zuel.app.dao.PatientDao;
 import org.zuel.app.dao.RegRecordDao;
+import org.zuel.app.model.Dept;
 import org.zuel.app.model.Doctor;
 import org.zuel.app.model.Patient;
 import org.zuel.app.model.RegRecord;
@@ -23,6 +25,63 @@ public class DoctorService {
             doctor = dlist.get(0);
         }
         return doctor;
+    }
+    //获取科室
+    public static Dept getDept(Doctor doctor) {
+    	int deptId = doctor.getDeptId();
+		Dept dept = null;
+    	List<Dept> list = DeptDao.getDept(deptId,null,null,null);
+    	if(list.size()>0) {
+    		dept=list.get(0);
+    	}
+    	return dept;
+    }
+    
+    //获取科室名
+    public static String getDeptName(Doctor doctor) {
+    	int deptId = doctor.getDeptId();
+    	String deptName="";
+    	switch(deptId) {
+    		case 1:
+    			deptName = "皮肤科";
+    			break;
+    		case 2:
+    			deptName = "精神科";
+    			break;
+    		case 3:
+    			deptName = "口腔科";
+    			break;
+    		case 4:
+    			deptName = "儿科";
+    			break;
+    		case 5:
+    			deptName = "内科";
+    			break;
+    		case 6:
+    			deptName = "外科";
+    			break;
+    		case 7:
+    			deptName = "中医科";
+    			break;
+    		case 8:
+    			deptName = "呼吸内科";
+    			break;
+    		case 9:
+    			deptName = "消化内科";
+    			break;
+    		case 10:
+    			deptName = "骨科";
+    			break;
+    		case 11:
+    			deptName = "肿瘤科";
+    			break;
+    		case 12:
+    			deptName = "血液科";
+    			break;
+    		default:
+    			break;
+    	}
+    	return deptName;
     }
 
     // getRecord()查询挂号记录;
@@ -51,16 +110,27 @@ public class DoctorService {
     }
 
     // 挂号记录集合中对指定时间的记录进行统计;
-    public static void limitTime(List<RegRecord> rList, String time) {
+    public static List<RegRecord> limitTime(List<RegRecord> rList, String time) {
         Iterator<RegRecord> iter = rList.iterator();
-        RegRecord record;
-        System.out.println("Registration records in "+time+": ");
+        List<RegRecord> fList = new ArrayList<>();
+        RegRecord record=null;
         while (iter.hasNext()) {
             record=iter.next();
             if (record.getRegTime().substring(0, 10).equals(time)) {
-                System.out.println(record.toString());
+                fList.add(record);
             }
         }
-        System.out.println();
+		return fList;
+    }
+    
+    public static Doctor newDoctor (String name, int sex, String passwd, int deptID) {
+		DoctorDao.insertDoctor(null, name, deptID, sex, passwd);
+		List<Doctor> d = DoctorDao.getDoctor(null, sex, deptID, name, passwd);
+    	Doctor doctor = d.get(0);
+    	return doctor;   	
+    }
+    
+    public static void editRemark(Doctor doctor,String remark) {
+    	DeptDao.updateRemark(doctor.getDeptId(), remark);
     }
 }

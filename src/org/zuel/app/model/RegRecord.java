@@ -57,6 +57,7 @@ public class RegRecord {
     public void setPrice(double price) {
         this.price = price;
     }
+    
 
     //setAll()方法设置所有属性;
     public void setAll(Scanner input) throws ParseException {

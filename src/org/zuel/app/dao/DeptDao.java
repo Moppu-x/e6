@@ -123,15 +123,45 @@ public class DeptDao {
             e.printStackTrace();
         }
     }
+    
+    public static void updateRemark(int id,String remark) {
+        //根据id修改remark;
+        try {
+            //定义修改数据的sql语句;
+            String sql = "UPDATE dept SET remark='"+remark+"' WHERE id="+id;
+            //创建connection和statement;
+            Connection conn = DbUtil.getConn();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            //执行语句;
+            pst.executeUpdate();
+            //关闭连接和statement;
+            DbUtil.close(pst, conn);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        }
+    }
 
     //getDept()方法实现数据查询;
-    public static List<Dept> getDept() {
+    public static List<Dept> getDept(Integer id, String name, Integer type, String remark) {
         //查询数据，返回一个Dept集合;
         List<Dept> deptlist = new ArrayList<>();
         Dept dept;
         try {
             //定义查询语句：
-            final String sql = "SELECT * FROM dept";
+        	String sql = "SELECT * FROM dept WHERE 1=1";
+            if(id!=null){
+                sql+=" and id="+id;
+            }
+            if(name!=null){
+                sql+=" and name= '"+name+"'";
+            }
+            if(type!=null){
+                sql+=" and type="+type;
+            }
+            if(remark!=null){
+                sql+=" and remark= '"+remark+"' ";
+            }
             //创建连接、statement和resultset;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);

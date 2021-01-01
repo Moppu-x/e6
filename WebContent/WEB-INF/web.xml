@@ -9,4 +9,49 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+
+	<servlet>
+  		<servlet-name>IndexServlet</servlet-name>
+		<servlet-class>org.zuel.app.servlet.IndexPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+  		<servlet-name>IndexServlet</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Reg</servlet-name>
+		<servlet-class>org.zuel.app.servlet.Reg</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Reg</servlet-name>
+		<url-pattern>/Reg</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserLogin</servlet-name>
+		<servlet-class>org.zuel.app.servlet.UserLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserLogin</servlet-name>
+		<url-pattern>/userLogin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>patientAction</servlet-name>
+		<servlet-class>org.zuel.app.servlet.PatientAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>patientAction</servlet-name>
+		<url-pattern>/patientAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>doctorAction</servlet-name>
+		<servlet-class>org.zuel.app.servlet.DoctorAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doctorAction</servlet-name>
+		<url-pattern>/doctorAction</url-pattern>
+	</servlet-mapping>
 </web-app>

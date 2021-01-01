@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>毛毯熊的医院管理系统</title>
+    <title><%= request.getAttribute("regmsg") %>——毛毯熊的医院管理系统</title>
     <style>
         body{
             background-image: url("pic/background.png");
@@ -12,7 +12,7 @@
             text-align: center;
         }
         .form-main{
-            margin: 180px auto;
+            margin: 220px auto;
             width: 550px;
             color: #fff;
         }
@@ -39,9 +39,15 @@
             min-height: 1px;
             padding-left: 15px;
             padding-right: 15px;
+            cursor: pointer;
         }
-        .btn {
-            width: 50%;
+        a.button {
+            -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+            text-decoration: none;
+            color: #fff;
+            width: 42%;
             display: inline-block;
             height: 50px;
             padding: 0 20px;
@@ -53,31 +59,30 @@
             font-size: 20px;
             font-weight: 300;
             line-height: 50px;
-            color: #fff;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="form-main">
         <div class="form-ceil">
-            <h3 style="color: rgba(255, 255, 255, 0.88);font-size: 25px;">欢迎使用毛毯熊的医院管理系统</h3>
+            <h3 style="color: rgba(255, 255, 255, 0.88);font-size: 25px;">毛毯熊提示您: <%= request.getAttribute("regmsg") %> </h3>
         </div>
         <div class="form-floor">
-            <form role="form" action="index" method="POST">
-                <div class="form-group">
-                    <button type="submit" class="btn" name="action" value="login">登录</button>
+            <% if(request.getAttribute("regmsg").equals("注册成功")){ %>
+            	<h3 style="color: rgba(255, 255, 255, 0.88);font-size: 20px;">您的ID是: <%= request.getAttribute("userid") %> </h3>
+            	<div class="form-group">
+                    <a href="login.jsp" class="button">前往登录</a>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn" name="action" value="reg_patient">新病人注册</button>
+            <% } %>
+            <% if(request.getAttribute("regmsg").equals("注册失败")){ %>
+            	<h3 style="color: rgba(255, 255, 255, 0.88);font-size: 20px;">请尝试重新注册或联系管理员</h3>
+            	<div class="form-group">
+                    <a href="index.jsp" class="button" >返回首页</a>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn" name="action" value="reg_doctor">新医生注册</button>
-                </div>
-            </form>
+            <% } %>
         </div>        
     </div>
 </body>

@@ -29,12 +29,7 @@ public class RegRecordDao {
             pst.setString(4, reg_time);
             pst.setDouble(5, price);
             // 执行语句;
-            int rs = pst.executeUpdate();
-            if (rs > 0) {
-                System.out.println("Insertion complete.");
-            } else {
-                System.out.println("Insertion failed.");
-            }
+            pst.executeUpdate();
             // 关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
@@ -58,12 +53,7 @@ public class RegRecordDao {
             pst.setString(4, reg.getRegTime());
             pst.setDouble(5, reg.getPrice());
             // 执行语句;
-            int rs = pst.executeUpdate();
-            if (rs > 0) {
-                System.out.println("Insertion complete.");
-            } else {
-                System.out.println("Insertion failed.");
-            }
+            pst.executeUpdate();
             // 关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {

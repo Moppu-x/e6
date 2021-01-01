@@ -13,27 +13,37 @@ import org.zuel.app.myutils.DbUtil;
 public class PatientDao {
     //PatientDao实现对数据表patient的增删改查;
     //insertPatient()增加数据;
-    public static void insertPatient(int id,String name,int sex,int age,String password) {
+    public static void insertPatient(Integer id,String name,Integer sex,Integer age,String password) {
         try {
             //定义插入数据的sql语句;
-            final String sql = "INSERT INTO patient VALUES(?,?,?,?,?)";
+        	String sql = "INSERT INTO patient VALUES(";
+        	if(id!=null){
+                sql+=id+",";
+            }
+        	else{ sql+="null,"; }
+            if(name!=null){
+                sql+="'"+name+"',";
+            }
+            else{ sql+="null,"; }
+            if(sex!=null){
+                sql+=sex+",";
+            }
+            else{ sql+="null,"; }
+            if(age!=null){
+                sql+=age+",";
+            }
+            else{ sql+="null,"; }
+            if(password!=null){
+                sql+="'"+password+"'";
+            }
+            else{ sql+="null"; }
+            sql+=")";
             //创建connection和statement;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
-            pst.setInt(1, id);
-            pst.setString(2, name);
-            pst.setInt(3, sex);
-            pst.setInt(4, age);
-            pst.setString(5, password);
             //执行语句;
-            int rs = pst.executeUpdate();
-            if(rs>0){
-                System.out.println("Insertion complete.");
-            }
-            else{
-                System.out.println("Insertion failed.");
-            }
+            pst.executeUpdate();
+
             //关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {

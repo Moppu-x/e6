@@ -44,6 +44,8 @@ public class Dept {
         this.remark = remark;
     }
 
+
+    
     //setAll()方法获取输入并赋值给各个属性;
     public void setAll(Scanner input) {
         System.out.println("Input the attributes of department");

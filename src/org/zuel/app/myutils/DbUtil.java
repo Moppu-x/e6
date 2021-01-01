@@ -1,9 +1,9 @@
 package org.zuel.app.myutils;
 
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 //自定义的JDBC连接工具类；

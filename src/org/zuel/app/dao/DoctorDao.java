@@ -13,27 +13,35 @@ import org.zuel.app.myutils.DbUtil;
 public class DoctorDao {
     //DoctorDao实现对数据表doctor的操作;
     //insertDoctor()增加数据;
-    public static void insertDoctor(int id,String name,int dept_id,int sex,String password) {
+    public static void insertDoctor(Integer id,String name,Integer dept_id,Integer sex,String password) {
         try {
             //定义插入数据的sql语句;
-            final String sql = "INSERT INTO doctor VALUES(?,?,?,?,?)";
-            //创建connection和statement;
+        	String sql = "INSERT INTO doctor VALUES(";
+        	if(id!=null){
+                sql+=id+",";
+            }
+        	else{ sql+="null,"; }
+            if(name!=null){
+                sql+="'"+name+"',";
+            }
+            else{ sql+="null,"; }
+            if(dept_id!=null){
+                sql+=dept_id+",";
+            }
+            else{ sql+="null,"; }
+            if(sex!=null){
+                sql+=sex+",";
+            }
+            else{ sql+="null,"; }
+            if(password!=null){
+                sql+="'"+password+"'";
+            }
+            else{ sql+="null"; }
+            sql+=")";
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
-            pst.setInt(1, id);
-            pst.setString(2, name);
-            pst.setInt(3, dept_id);
-            pst.setInt(4, sex);
-            pst.setString(5, password);
             //执行语句;
-            int rs = pst.executeUpdate();
-            if(rs>0){
-                System.out.println("Insertion complete.");
-            }
-            else{
-                System.out.println("Insertion failed.");
-            }
+            pst.executeUpdate();
             //关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
@@ -56,13 +64,7 @@ public class DoctorDao {
             pst.setInt(4, doctor.getSex());
             pst.setString(5, doctor.getPassword());
             //执行语句;
-            int rs = pst.executeUpdate();
-            if(rs>0){
-                System.out.println("Insertion complete.");
-            }
-            else{
-                System.out.println("Insertion failed.");
-            }
+            pst.executeUpdate();
             //关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
