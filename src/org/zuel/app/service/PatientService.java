@@ -2,11 +2,12 @@ package org.zuel.app.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
+import org.zuel.app.dao.DeptDao;
 import org.zuel.app.dao.PatientDao;
 import org.zuel.app.dao.RegRecordDao;
+import org.zuel.app.model.Dept;
 import org.zuel.app.model.Patient;
 import org.zuel.app.model.RegRecord;
 
@@ -48,17 +49,18 @@ public class PatientService {
         return patient;
     }
 
-    //createPatient()方法用于新建Patient对象并写入数据库;
-    public static Patient createPatient(Scanner in) {
-        Patient patient = new Patient();
-        patient.setAll(in);
-        PatientDao.insertPatient(patient);
-        List<Patient> p = 
-        PatientDao.getPatient(null, patient.getName(), patient.getSex(), patient.getAge(), patient.getPassword());
-        patient = p.get(0);
-        return patient;
-    }
+//    //createPatient()方法用于新建Patient对象并写入数据库;
+//    public static Patient createPatient(Scanner in) {
+//        Patient patient = new Patient();
+//        patient.setAll(in);
+//        PatientDao.insertPatient(patient);
+//        List<Patient> p = 
+//        PatientDao.getPatient(null, patient.getName(), patient.getSex(), patient.getAge(), patient.getPassword());
+//        patient = p.get(0);
+//        return patient;
+//    }
     
+    //病人注册时用于创建新对象
     public static Patient newPatient (String name, int sex, String passwd, int age) {
 		PatientDao.insertPatient(null, name, sex, age, passwd);
 		List<Patient> p = PatientDao.getPatient(null, name, sex, age, passwd);
@@ -66,58 +68,14 @@ public class PatientService {
     	return patient;   	
     }
     
-    //getDeptName方法根据科室id返回科室名
+    //获取挂号记录的科室id对应的科室名
     public static String getDeptName(int deptId) {
-    	String deptName="";
-    	switch(deptId) {
-    		case 1:
-    			deptName = "皮肤科";
-    			break;
-    		case 2:
-    			deptName = "精神科";
-    			break;
-    		case 3:
-    			deptName = "口腔科";
-    			break;
-    		case 4:
-    			deptName = "儿科";
-    			break;
-    		case 5:
-    			deptName = "内科";
-    			break;
-    		case 6:
-    			deptName = "外科";
-    			break;
-    		case 7:
-    			deptName = "中医科";
-    			break;
-    		case 8:
-    			deptName = "呼吸内科";
-    			break;
-    		case 9:
-    			deptName = "消化内科";
-    			break;
-    		case 10:
-    			deptName = "骨科";
-    			break;
-    		case 11:
-    			deptName = "肿瘤科";
-    			break;
-    		case 12:
-    			deptName = "血液科";
-    			break;
-    		default:
-    			break;
+    	String name = null;
+    	List<Dept> list = DeptDao.getDept(deptId, null, null, null);
+    	if(list.size()>0) {
+    		name = list.get(0).getName();
     	}
-    	return deptName;
-    }
-    
-    public static String getPatientName(int id) {
-		String name = null;
-		List<Patient> list = PatientDao.getPatient(id, null, null, null, null);
-		if(list.size()>0) {
-			name=list.get(0).getName();
-		}
     	return name;
     }
+
 }

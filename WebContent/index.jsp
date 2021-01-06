@@ -53,7 +53,7 @@
             font-size: 20px;
             font-weight: 300;
             line-height: 50px;
-            color: #fff;
+            color: #fffedf;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;

@@ -46,7 +46,7 @@
             -moz-appearance: button;
             appearance: button;
             text-decoration: none;
-            color: #fff;
+            color: #fffedf;
             width: 42%;
             display: inline-block;
             height: 50px;

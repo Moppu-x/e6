@@ -1,4 +1,5 @@
 <%@ page import="org.zuel.app.model.Doctor" 
+		 import="org.zuel.app.model.Patient" 
 		 import="org.zuel.app.model.Dept" 
 		 import="org.zuel.app.model.RegRecord"
 		 import="org.zuel.app.service.PatientService"
@@ -22,7 +23,7 @@
             text-align: center;
         }
         table {
-            background-color: rgba(240, 248, 255, 0.6);
+            background-color: rgba(255, 254, 239, 0.6);
             border-radius: 8px;
             margin-bottom: 30px;
             border: 1px solid rgba(110, 185, 185, 0.8);
@@ -35,13 +36,13 @@
             border-collapse: collapse;
         }
         table tr th {
-            width: 220px;
+            width: 147px;
             font-size: 20px;
             color: rgba(13, 196, 196, 0.8);
             text-align: center;
         }
         table tr td {
-            width: 220px;
+            width: 147px;
             font-size: 18px;
             color:  rgba(78, 78, 78, 0.88);
             text-align: center;          
@@ -141,7 +142,7 @@
             font-size: 20px;
             font-weight: 350;
             line-height: 50px;
-            color: #fff;
+            color: #fffedf;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;
@@ -159,7 +160,7 @@
             font-size: 20px;
             font-weight: 350;
             line-height: 50px;
-            color: #fff;
+            color: #fffedf;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;
@@ -170,7 +171,7 @@
             -moz-appearance: button;
             appearance: button;
             text-decoration: none;
-            color: #fff;
+            color: #fffedf;
             width: 20%;
             display: inline-block;
             height: 50px;
@@ -193,7 +194,7 @@
             height: 50px;
             margin-bottom: 15px;
             padding: 0 20px;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,254,239,0.6);
             border: 1px solid #cccccc;
             font-family:  sans-serif;
             font-size: 18px;
@@ -216,7 +217,7 @@
             margin-bottom: 15px;
             margin-left: 15px;
             padding: 0 20px;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,254,239,0.6);
             border: 1px solid #cccccc;
             font-family:  sans-serif;
             font-size: 18px;
@@ -274,7 +275,7 @@
                         <%="女" %>
                     <% } %>
                 </p>
-                <p>科室: <%=DoctorService.getDeptName(user) %></p>
+                <p>科室: <%=dept.getName() %></p>
             </div>
         </div>
         <div class="block-in">
@@ -299,26 +300,39 @@
         </div>
         <div class="block-in">
             <div class="block-head">
-                <h3><%=DoctorService.getDeptName(user) %>共查询到<%=list.size() %>条挂号记录</h3>   
+                <h3><%=dept.getName() %>共查询到<%=list.size() %>条挂号记录</h3>   
             </div>
             <table>
                 <tr>
                     <th>记录号</th>
                     <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
                     <th>挂号时间</th>
                     <th>挂号费(元)</th>
                 </tr>
-                <% if(list.size()>0){ %>
-                	<% for(RegRecord item : list){ %>
+                <% if(list.size()>0){ 
+                	Patient patient = null; %>
+                	<% for(RegRecord item : list){
+                		patient = DoctorService.getPatientInfo(item.getPatientId()); %>
                 		<tr>
 		                    <td><%=item.getId() %></td>
-		                    <td><%=PatientService.getPatientName(item.getPatientId()) %></td>
+		                    <td><%=patient.getName() %></td>
+		                    <td><% if(patient.getSex()==0) { %>
+                        			<%="男" %>
+                    			<% } else { %>
+                        			<%="女" %>
+                    			<% } %>
+                    		</td>
+                    		<td><%=patient.getAge() %></td>
 		                    <td><%=item.getRegTime() %></td>
 		                    <td><%=item.getPrice() %></td>
 	                	</tr>
                 	<% } %>
                 <% } else { %>
 	                <tr>
+	                    <td></td>
+	                    <td></td>
 	                    <td></td>
 	                    <td></td>
 	                    <td></td>

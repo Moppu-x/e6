@@ -67,7 +67,7 @@
             height: 50px;
             margin: 0;
             padding: 0 20px;
-            background: #fff;
+            background: rgba(255,254,239,0.6);
             border: 1px solid #cccccc;
             font-family:  sans-serif;
             font-size: 18px;
@@ -101,7 +101,7 @@
             font-size: 20px;
             font-weight: 300;
             line-height: 50px;
-            color: #fff;
+            color: #fffedf;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;
@@ -129,7 +129,7 @@
         <div class="form-ceil-left">
             <h3 style="color: rgba(255, 255, 255, 0.88);">用户登录</h3>
         </div>
-        <form role="form" action="userLogin" method="post">
+        <form role="form" action="userlogin" method="post">
             <div class="form-group blank">
                 <label class="lab" ></label>ID<input
                     style="font-weight: bold" type="text" name="ID"
@@ -151,7 +151,7 @@
         <% if(request.getAttribute("errMsg")!=null){ %>
 	        <span class="msg"><%=request.getAttribute("errMsg") %></span>
 	    <% } %>
-        <span><a href="register.jsp" class="reg">注册</a></span>
+        <span><a href="index.jsp" class="reg">注册</a></span>
     </div>
 </div>
 </body>

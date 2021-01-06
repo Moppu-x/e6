@@ -20,7 +20,7 @@
             text-align: center;
         }
         table {
-            background-color: rgba(240, 248, 255, 0.6);
+            background-color: rgba(255, 254, 239, 0.6);
             border-radius: 8px;
             margin-bottom: 30px;
             border: 1px solid rgba(110, 185, 185, 0.8);
@@ -129,7 +129,7 @@
             font-size: 20px;
             font-weight: 350;
             line-height: 50px;
-            color: #fff;
+            color: #fffedf;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;
@@ -147,7 +147,7 @@
             font-size: 20px;
             font-weight: 350;
             line-height: 50px;
-            color: #fff;
+            color: #fffedf;
             -moz-border-radius: 25px;
             -webkit-border-radius: 25px;
             border-radius: 25px;
@@ -158,7 +158,7 @@
             -moz-appearance: button;
             appearance: button;
             text-decoration: none;
-            color: #fff;
+            color: #fffedf;
             width: 20%;
             display: inline-block;
             height: 50px;

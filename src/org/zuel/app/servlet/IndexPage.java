@@ -16,15 +16,16 @@ public class IndexPage extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		//获取用户点击了哪个按钮，转至对应页面
 		String action = (String)req.getParameter("action");
-		if (action.equals("login")) {
-			req.getRequestDispatcher("/login.jsp").forward(req, resp);
-		}
+		String dest_page = "login.jsp";
+
 		if(action.equals("reg_patient")) {
-			req.getRequestDispatcher("/reg_patient.jsp").forward(req, resp);
+			dest_page = "reg_patient.jsp";
 		}
 		if(action.equals("reg_doctor")) {
-			req.getRequestDispatcher("/reg_doctor.jsp").forward(req, resp);
+			dest_page = "reg_doctor.jsp";
 		}
+		
+		req.getRequestDispatcher(dest_page).forward(req, resp);
 	}
 
 	@Override

@@ -196,7 +196,7 @@ public class DoctorDao {
                 sql += " and dept_id=" + dept_id;
             }
             if (name != null) {
-                sql += " and name= '" + name + "' ";
+                sql += " and t.name= '" + name + "' ";
             }
             if (password != null) {
                 sql += " and password= '" + password + "' ";
