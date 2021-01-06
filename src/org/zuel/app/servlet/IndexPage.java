@@ -1,7 +1,6 @@
 package org.zuel.app.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +23,12 @@ public class IndexPage extends HttpServlet{
 		if(action.equals("reg_doctor")) {
 			dest_page = "reg_doctor.jsp";
 		}
-		
+
 		req.getRequestDispatcher(dest_page).forward(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req,resp);
-	}	
+	}
 }
